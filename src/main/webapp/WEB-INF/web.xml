@@ -8,7 +8,7 @@
         <auth-method>FORM</auth-method>
         <form-login-config>
             <form-login-page>/WEB-INF/views/auth/login.jsp</form-login-page>
-            <form-error-page>/WEB-INF/views/auth/login.jsp</form-error-page>
+            <form-error-page>/WEB-INF/views/auth/login.jsp?error=true</form-error-page>
         </form-login-config>
     </login-config>
 </web-app>

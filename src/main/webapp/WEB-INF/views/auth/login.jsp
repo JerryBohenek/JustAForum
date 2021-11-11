@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -23,20 +24,28 @@
     <div class="row">
 
         <div class="col-md-6 order-md-1 offset-md-3">
-            <div class="alert alert-info mb-4" role="alert" th:if="${confirmStart}">
-                <h4 class="alert-heading">One more step</h4>
-                <p th:text="${confirmStart}"></p>
-            </div>
 
-            <div class="alert alert-success mb-4" role="alert" th:if="${confirmDone}">
-                <h4 class="alert-heading">Well done!</h4>
-                <p th:text="${confirmDone}"></p>
-            </div>
+            <c:if test="${not empty param.confirmStart}">
+                <div class="alert alert-info mb-4" role="alert">
+                    <h4 class="alert-heading">One more step</h4>
+                    <p><c:out value="${param.confirmStart}" /></p>
+                </div>
+            </c:if>
 
-            <div class="alert alert-danger mb-4" role="alert" th:if="${confirmError}">
-                <h4 class="alert-heading">Error!</h4>
-                <p th:text="${confirmError}"></p>
-            </div>
+            <c:if test="${not empty param.confirmDone}">
+                <div class="alert alert-success mb-4" role="alert">
+                    <h4 class="alert-heading">Well done!</h4>
+                    <p><c:out value="${param.confirmDone}" /></p>
+                </div>
+            </c:if>
+
+            <c:if test="${not empty param.confirmError}">
+                <div class="alert alert-danger mb-4" role="alert">
+                    <h4 class="alert-heading">Error!</h4>
+                    <p><c:out value="${param.confirmError}" /></p>
+                </div>
+            </c:if>
+
         </div>
     </div>
 
@@ -44,23 +53,25 @@
 
         <div class="col-md-4 order-md-1 offset-md-4">
 
+            <c:if test="${param.error == true}">
+                <c:set value="is-invalid" var="errorCssClass" />
+            </c:if>
+
             <form class="needs-validation" role="form" action="j_security_check" method="post">
 
                 <div class="mb-2">
                     <label class="sr-only" for="username">Username</label>
-                    <input autofocus class="form-control" id="username" name="j_username" placeholder="Username" required
-                           th:classappend="${loginError} ? is-invalid" type="text">
-                    <div class="invalid-feedback">
-                    </div>
+                    <input autofocus class="form-control ${errorCssClass}" id="username" name="j_username" placeholder="Username" required type="text">
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-2">
                     <label class="sr-only" for="password">Password</label>
-                    <input class="form-control" id="password" name="j_password" placeholder="Password" required
-                           th:classappend="${loginError} ? is-invalid" type="password">
-                    <div class="invalid-feedback">
-                        Wrong username or password
-                    </div>
+                    <input class="form-control ${errorCssClass}" id="password" name="j_password" placeholder="Password" required type="password">
+
+                        <div class="invalid-feedback">
+                            Wrong username or password
+                        </div>
                 </div>
 
                 <div class="checkbox mb-3">

@@ -23,7 +23,9 @@ public class SignupController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserRegistration userRegistration = getUserData(request);
         userService.register(userRegistration);
-        response.sendRedirect("/");
+
+        request.setAttribute("confirmStart",("Activate your email: " + request.getParameter("email")));
+        request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
     }
 
     private UserRegistration getUserData(HttpServletRequest request) {

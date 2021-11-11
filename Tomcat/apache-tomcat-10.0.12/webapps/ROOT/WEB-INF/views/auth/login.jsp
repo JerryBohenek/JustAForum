@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -48,19 +49,19 @@
 
                 <div class="mb-2">
                     <label class="sr-only" for="username">Username</label>
-                    <input autofocus class="form-control" id="username" name="j_username" placeholder="Username" required
-                           th:classappend="${loginError} ? is-invalid" type="text">
-                    <div class="invalid-feedback">
-                    </div>
+                    <input autofocus class="form-control" id="username" name="j_username" placeholder="Username" required type="text">
                 </div>
 
                 <div class="mb-2">
                     <label class="sr-only" for="password">Password</label>
-                    <input class="form-control" id="password" name="j_password" placeholder="Password" required
-                           th:classappend="${loginError} ? is-invalid" type="password">
-                    <div class="invalid-feedback">
-                        Wrong username or password
-                    </div>
+                    <input class="form-control" id="password" name="j_password" placeholder="Password" required type="password">
+
+                    <c:if test="${not empty param.fail}">
+                        <div class="invalid-feedback">
+                            Wrong username or password
+                        </div>
+                    </c:if>
+
                 </div>
 
                 <div class="checkbox mb-3">
