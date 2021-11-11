@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="Forum for developers" name="description">
+    <meta content="Grupa 2" name="author">
+
+    <title>JaF</title>
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" th:href="@{/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
+        <a class="navbar-brand" href="/"><img alt="JaF"
+                                              th:src="@{/images/logo_white_narrow.png}" style="height: 20px; width: 55px; margin-bottom: 4px;" class="d-inline-block"></a>
+        <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarCollapse" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="submenu" role="button"> Categories </a>
+
+                    <div aria-labelledby="submenu" class="dropdown-menu">
+
+                        <a class="dropdown-item" href="/frontend"> Frontend</a>
+                        <a class="dropdown-item" href="/backend"> Backend </a>
+                        <a class="dropdown-item" href="/mobile"> Mobile </a>
+
+                    </div>
+
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/my-posts">My posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about-us">About us</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <span class="text-light font-weight-bold mr-2" sec:authentication="name"
+                      sec:authorize="isAuthenticated()"></span>
+                <a class="btn btn-info mr-2" href="/login" role="button"
+                   th:if="${#authorization.expression('!isAuthenticated()')}">Log in</a>
+                <a class="btn btn-info" href="/signup" role="button"
+                   th:if="${#authorization.expression('!isAuthenticated()')}">Sign up</a>
+                <a class="btn btn-info" href="/logout" role="button"
+                   th:if="${#authorization.expression('isAuthenticated()')}">Logout</a>
+            </form>
+        </div>
+    </nav>
+</header>
+
+
+<main role="main">
+
+    <section class="title text-center mb-3 jumbotron">
+        <div class="container">
+            <h1 class="title-heading" th:text="${#authentication.getPrincipal().getUsername()}"></h1>
+            <p class="lead text-muted mb-0">These are your posts.</p>
+        </div>
+    </section>
+
+    <div class="container-fluid py-5">
+        <div class="row">
+
+            <aside class="col-md-4 col-lg-3 col-xl-2 order-md-last mb-4">
+                <div class="position-sticky-top-70">
+
+                    <a class="btn btn-outline-success btn-lg btn-block mb-2" href="/my-posts/new-post"
+                       role="button">Add new post</a>
+
+                    <div class="card bg-secondary">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Your account</h5>
+                            <hr>
+                            <div class="card-text">
+                                <p class="mb-0 text-light">Username:</p>
+                                <p class="mb-2" th:text="${#authentication.getPrincipal().getUsername()}"></p>
+
+
+                                <p class="mb-0 text-light">Email:</p>
+                                <p class="mb-2" th:text="${#authentication.getPrincipal().getEmail()}"></p>
+
+
+                                <p class="mb-0 text-light">Number of posts:</p>
+                                <p class="mb-2" th:text="${numberOfPosts}"></p>
+
+                                <p class="mb-2 text-light">Settings:</p>
+                                <a class="btn btn-outline-info btn-block mb-2" href="/change-password" role="button">Change
+                                    password</a>
+                                <button class="btn btn-outline-danger btn-block" data-toggle="modal"
+                                        th:attr="data-target='#deleteUser'+${user.getId()}"
+                                        type="button">Delete account
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="col-md-8 col-lg-9 col-xl-10 px-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="alert alert-info mt-4 mt-md-0 col-md-6 offset-md-3" role="alert"
+                             th:if="${#lists.isEmpty(myPosts)}">
+                            <h4 class="alert-heading">Well</h4>
+                            <p>You have no posts. If you want to fill this space, click on "Add new post".</p>
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-xl-4" th:each="post: ${myPosts}">
+                            <div class="card bg-secondary mb-4">
+
+                                <div class="d-flex justify-content-between bg-info">
+
+                                    <h5 class="card-header" th:text="${post.getTitle()}"></h5>
+
+                                    <div class="btn-group btn-group-sm"
+                                         th:if="${#authorization.expression('isAuthenticated()')} and (${post.getUsername()} == ${#authentication.getPrincipal().getUsername()})">
+                                        <button aria-expanded="false" aria-haspopup="true"
+                                                class="btn btn-outline-secondary dropdown-toggle p-0 pb-1 options bg-transparent text-white"
+                                                data-toggle="dropdown" type="button">
+                                            <svg class="bi bi-three-dots-vertical" fill="currentColor" height="16"
+                                                 viewBox="0 0 16 16"
+                                                 width="16" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <form class="needs-validation" role="form"
+                                                  th:action="@{/single-post/del/{id}(id=${post.getId()})}"
+                                                  th:method="post">
+                                                <button class="dropdown-item" type="submit">delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="card-text" th:text="${post.getContent()}"></p>
+                                    <div class="d-flex justify-content-between ">
+                                        <div>
+                                            <a class="btn btn-outline-info"
+                                               th:href="@{/single-post/{id}(id=${post.getId()})}">View all</a>
+                                        </div>
+                                        <div class="d-flex align-content-center align-items-end flex-column">
+                                            <small class="text-muted" th:text="${post.getUsername()}"></small>
+                                            <small class="text-muted" th:text="${post.getPublishedDateTime()}"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="deleteUserLabel" class="modal fade" role="dialog"
+     tabindex="-1" th:attr="id='deleteUser'+${user.getId()}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-light" style="background-color: #1b2127;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserLabel">Delete Account</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your account?
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" data-dismiss="modal" type="button">No</button>
+
+                <form role="form"
+                      th:action="@{/users/del/{id}(id=${user.getId()})}"
+                      th:method="post">
+                    <button class="btn btn-danger" type="submit">Yes</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a class="text-info" href="#">Back to top</a>
+        </p>
+        <p>Just a Forum &copy;</p>
+    </div>
+</footer>
+<!-- Bootstrap script-->
+<script th:src="@{/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script th:src="@{/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
