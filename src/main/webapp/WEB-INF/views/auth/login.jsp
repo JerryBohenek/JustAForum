@@ -25,24 +25,24 @@
 
         <div class="col-md-6 order-md-1 offset-md-3">
 
-            <c:if test="${not empty param.confirmStart}">
+            <c:if test="${requestScope.confirmStart != null}">
                 <div class="alert alert-info mb-4" role="alert">
                     <h4 class="alert-heading">One more step</h4>
-                    <p><c:out value="${param.confirmStart}" /></p>
+                    <p><c:out value="${requestScope.confirmStart}" /></p>
                 </div>
             </c:if>
 
-            <c:if test="${not empty param.confirmDone}">
+            <c:if test="${requestScope.confirmDone != null}">
                 <div class="alert alert-success mb-4" role="alert">
                     <h4 class="alert-heading">Well done!</h4>
-                    <p><c:out value="${param.confirmDone}" /></p>
+                    <p><c:out value="${requestScope.confirmDone}" /></p>
                 </div>
             </c:if>
 
-            <c:if test="${not empty param.confirmError}">
+            <c:if test="${requestScope.confirmError != null}">
                 <div class="alert alert-danger mb-4" role="alert">
                     <h4 class="alert-heading">Error!</h4>
-                    <p><c:out value="${param.confirmError}" /></p>
+                    <p><c:out value="${requestScope.confirmError}" /></p>
                 </div>
             </c:if>
 
@@ -76,7 +76,7 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input name="remember-me" type="checkbox"> Remember me
+                        <input name="remember-me" type="checkbox" checked> Remember me
                     </label>
                 </div>
 

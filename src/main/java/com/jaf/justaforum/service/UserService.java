@@ -2,6 +2,7 @@ package com.jaf.justaforum.service;
 
 import com.jaf.justaforum.dao.UserDao;
 import com.jaf.justaforum.model.User;
+import com.jaf.justaforum.validation.UserRegisterValidation;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;

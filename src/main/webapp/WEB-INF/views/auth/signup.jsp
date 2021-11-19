@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -24,14 +25,30 @@
 
         <div class="col-md-4 order-md-1 offset-md-4">
 
+            <c:if test="${requestScope.usernameError != null}">
+                <c:set value="is-invalid" var="invalidUsername" />
+            </c:if>
+
+            <c:if test="${requestScope.emailError != null}">
+                <c:set value="is-invalid" var="invalidEmail" />
+            </c:if>
+
+            <c:if test="${requestScope.passwordError != null}">
+                <c:set value="is-invalid" var="invalidPassword" />
+            </c:if>
+
+            <c:if test="${requestScope.confirmPasswordError != null}">
+                <c:set value="is-invalid" var="invalidConfirmPassword" />
+            </c:if>
+
             <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/signup" method="post">
 
                 <div class="mb-2">
                     <label for="username">Username</label>
-                    <input class="form-control" id="username" name="username" type="text" required>
-                    <div class="invalid-feedback">
-                        <p>Invalid data</p>
-                    </div>
+                    <input class="form-control ${invalidUsername}" id="username" name="username" type="text" required>
+                        <div class="invalid-feedback">
+                            <p><c:out value="${requestScope.usernameError}" /></p>
+                        </div>
                 </div>
 
                 <div class="mb-2">
@@ -40,9 +57,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input class="form-control" id="email" name="email" type="text" required>
+                        <input class="form-control ${invalidEmail}" id="email" name="email" type="email" required>
                         <div class="invalid-feedback" style="width: 100%;">
-                            <p>Invalid data</p>
+                            <p><c:out value="${requestScope.emailError}" /></p>
                         </div>
                     </div>
                 </div>
@@ -52,17 +69,17 @@
 
                 <div class="mb-2">
                     <label for="password">Password</label>
-                    <input class="form-control" id="password" name="password" type="password" required>
+                    <input class="form-control ${invalidPassword}" id="password" name="password" type="password" required>
                     <div class="invalid-feedback">
-                        <p>Invalid data</p>
+                        <p><c:out value="${requestScope.passwordError}" /></p>
                     </div>
                 </div>
 
                 <div class="mb-2">
                     <label for="confirmPassword">Confirm password</label>
-                    <input class="form-control" id="confirmPassword" name="confirmPassword" required type="password">
+                    <input class="form-control ${invalidConfirmPassword}" id="confirmPassword" name="confirmPassword" required type="password">
                     <div class="invalid-feedback">
-                        <p>Invalid data</p>
+                        <p><c:out value="${requestScope.confirmPasswordError}" /></p>
                     </div>
                 </div>
 
