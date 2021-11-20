@@ -57,17 +57,17 @@
                 <c:set value="is-invalid" var="errorCssClass" />
             </c:if>
 
-            <form class="needs-validation" role="form" action="j_security_check" method="post">
+            <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/auth" method="post">
 
                 <div class="mb-2">
                     <label class="sr-only" for="username">Username</label>
-                    <input autofocus class="form-control ${errorCssClass}" id="username" name="j_username" placeholder="Username" required type="text">
+                    <input autofocus class="form-control ${errorCssClass}" id="username" name="username" placeholder="Username" required type="text">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-2">
                     <label class="sr-only" for="password">Password</label>
-                    <input class="form-control ${errorCssClass}" id="password" name="j_password" placeholder="Password" required type="password">
+                    <input class="form-control ${errorCssClass}" id="password" name="password" placeholder="Password" required type="password">
 
                         <div class="invalid-feedback">
                             Wrong username or password
@@ -76,7 +76,7 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input name="remember-me" type="checkbox" checked> Remember me
+                        <input name="rememberMe" type="checkbox" checked> Remember me
                     </label>
                 </div>
 

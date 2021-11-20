@@ -10,7 +10,7 @@ public class User {
     private LocalDateTime registrationDate;
     private short  active;
 
-    public User(Integer id, String email, String username, String password, LocalDateTime registrationDate, short  active) {
+    public User(Integer id, String username, String email, String password, LocalDateTime registrationDate, short  active) {
         this.id = id;
         this.email = email;
         this.username = username;
