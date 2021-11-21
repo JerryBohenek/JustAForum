@@ -25,10 +25,9 @@ public class UserConfirmController extends HttpServlet {
 
         if (optionalToken.isPresent()) {
             userService.confirmUser(optionalToken.get());
-            request.setAttribute("confirmDone", "Email address has been confirmed.");
+            response.sendRedirect("/login?confirm=true");
         } else {
-            request.setAttribute("confirmError", "The link is invalid or broken.");
+            response.sendRedirect("/login?confirm=false");
         }
-        request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
     }
 }
