@@ -15,6 +15,8 @@ public class EmailUtil {
         String from = "justaforummail@gmail.com";
         final String username = "justaforummail@gmail.com";
         final String password = "zaq1@WSXX";
+        String link = "<a href=\"http://localhost:8080/confirm?token=" + token + "\"> Click here to active</a>";
+
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -38,7 +40,7 @@ public class EmailUtil {
             message.setSubject("Confirm your account");
 
             //set the content of the email message
-            message.setContent("<h2>JaF - Just a Forum</h2><p>If you want to activate your account, click on the link. " + token + "</p>", "text/html");
+            message.setContent("<h2>JaF - Just a Forum</h2><p>If you want to activate your account, click on the link. " + link + "</p>", "text/html");
 
             //send the email message
             Transport.send(message);

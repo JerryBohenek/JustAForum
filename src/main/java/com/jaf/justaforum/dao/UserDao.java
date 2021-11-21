@@ -118,6 +118,25 @@ public class UserDao extends BaseDao {
         }
     }
 
+    public void updateActive(Integer id, Short active) {
+        final String query = """
+                        UPDATE
+                            users
+                        SET
+                            active = ?
+                        WHERE
+                            id = ?
+                        """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setShort(1, active);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private User mapRow(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String username = resultSet.getString("username");

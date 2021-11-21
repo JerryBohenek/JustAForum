@@ -1,6 +1,5 @@
 package com.jaf.justaforum.controller;
 
-import com.jaf.justaforum.util.EmailUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -26,4 +26,9 @@
     <security-role>
         <role-name>USER</role-name>
     </security-role>
+
+    <error-page>
+        <error-code>408</error-code>
+        <location>/login</location>
+    </error-page>
 </web-app>
