@@ -27,7 +27,6 @@ public class UserService {
     }
 
 
-
     private void hashPasswordWithSha256(User user) throws NoSuchAlgorithmException {
         String sha256Password = DigestUtils.sha256Hex(user.getPassword());
         user.setPassword(sha256Password);

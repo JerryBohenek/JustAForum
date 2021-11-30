@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="Forum for developers" name="description">
-    <meta content="JAF Group" name="author">
+    <meta content="Grupa 2" name="author">
 
     <title>JaF</title>
 
@@ -18,7 +18,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/"><img alt="JaF"
-                                              src="${pageContext.request.contextPath}/resources/images/logo_white_narrow.png" style="height: 20px; width: 55px; margin-bottom: 4px;" class="d-inline-block"></a>
+                                                                                src="${pageContext.request.contextPath}/resources/images/logo_white_narrow.png" style="height: 20px; width: 55px; margin-bottom: 4px;" class="d-inline-block"></a>
         <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler"
                 data-target="#navbarCollapse" data-toggle="collapse" type="button">
@@ -26,7 +26,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -47,7 +47,7 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/my-posts">My posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About us</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/about-us">About us</a>
                 </li>
             </ul>
 
@@ -73,44 +73,28 @@
 
     <section class="title text-center mb-3 jumbotron">
         <div class="container">
-            <h1 class="title-heading">Just a Forum</h1>
-            <p class="lead text-muted mb-0">Welcome to the forum that is intended for developers.</p>
-            <p class="lead text-muted mt-0">Choose your category and go ahead.</p>
+            <h1 class="title-heading">About us</h1>
+            <p class="lead text-muted mb-0">Our Scrum Team</p>
         </div>
     </section>
 
     <div class="container py-5">
         <div class="row">
 
-            <div class="col-md-4">
-                <div class="card mb-4 bg-secondary">
-                    <img alt="Frontend" class="card-img-top" src="${pageContext.request.contextPath}/resources/images/frontend.png">
+            <div class="col-md-8 mb-4 offset-md-2">
+                <div class="card bg-secondary">
                     <div class="card-body">
-                        <h5 class="card-title">Frontend</h5>
-                        <p class="card-text">Layout and all about user interaction.</p>
-                        <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/frontend">View</a>
+                        <h5 class="card-title">Remigusz Ratajski</h5>
+                        <p class="card-text">Scrum Master</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card mb-4 bg-secondary">
-                    <img alt="Backend" class="card-img-top" src="${pageContext.request.contextPath}/resources/images/backend.png">
+            <div class="col-md-8 mb-4 offset-md-2">
+                <div class="card bg-secondary">
                     <div class="card-body">
-                        <h5 class="card-title">Backend</h5>
-                        <p class="card-text">Api, databases, servers and much more.</p>
-                        <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/backend">View</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4 bg-secondary">
-                    <img alt="Mobile" class="card-img-top" src="${pageContext.request.contextPath}/resources/images/mobile.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">Mobile</h5>
-                        <p class="card-text">Posts about mobile app development.</p>
-                        <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/mobile">View</a>
+                        <h5 class="card-title">Bartosz Płonka</h5>
+                        <p class="card-text">Graphic designer</p>
                     </div>
                 </div>
             </div>
@@ -123,4 +107,3 @@
 <%@ include file="../segments/scripts.jspf" %>
 </body>
 </html>
-

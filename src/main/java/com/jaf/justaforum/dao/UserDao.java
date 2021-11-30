@@ -144,6 +144,7 @@ public class UserDao extends BaseDao {
         String password = resultSet.getString("password");
         LocalDateTime registrationDate = resultSet.getObject("registration_date_time", LocalDateTime.class);
         short  active = resultSet.getObject("active", Short.class);
+
         return new User(id, username, email, password, registrationDate, active);
     }
 }
