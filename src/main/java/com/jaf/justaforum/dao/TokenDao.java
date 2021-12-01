@@ -19,14 +19,14 @@ public class TokenDao extends BaseDao {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, token.getToken());
             statement.setObject(2, token.getCreatedDate());
-            statement.setInt(3, token.getUserId());
+            statement.setLong(3, token.getUserId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void deleteToken(Integer id) {
+    public void deleteToken(Long id) {
         final String query = """
                         DELETE FROM
                             tokens
@@ -35,7 +35,7 @@ public class TokenDao extends BaseDao {
                         """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -65,10 +65,10 @@ public class TokenDao extends BaseDao {
     }
 
     private Token mapRow(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
+        Long id = resultSet.getLong("id");
         String token = resultSet.getString("token");
         LocalDateTime createdDate = resultSet.getObject("created_date", LocalDateTime.class);
-        Integer  userId = resultSet.getObject("users_id", Integer.class);
+        Long  userId = resultSet.getLong("users_id");
 
         return new Token(id, token, createdDate, userId);
     }

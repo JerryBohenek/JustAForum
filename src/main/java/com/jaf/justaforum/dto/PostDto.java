@@ -1,32 +1,21 @@
-package com.jaf.justaforum.model;
+package com.jaf.justaforum.dto;
 
-import java.time.LocalDateTime;
+import com.jaf.justaforum.model.PostCategory;
 
-public class Post {
+public class PostDto {
     private Long id;
     private String title;
     private String content;
     private PostCategory postCategory;
-    private LocalDateTime publishedDateTime;
-    private Long userId;
+    private String publishedDateTime;
     private String username;
 
-    public Post(Long id, String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, Long userId, String username) {
+    public PostDto(Long id, String title, String content, PostCategory postCategory, String publishedDateTime, String username) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.postCategory = postCategory;
         this.publishedDateTime = publishedDateTime;
-        this.userId = userId;
-        this.username = username;
-    }
-
-    public Post(String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, Long userId, String username) {
-        this.title = title;
-        this.content = content;
-        this.postCategory = postCategory;
-        this.publishedDateTime = publishedDateTime;
-        this.userId = userId;
         this.username = username;
     }
 
@@ -62,20 +51,12 @@ public class Post {
         this.postCategory = postCategory;
     }
 
-    public LocalDateTime getPublishedDateTime() {
+    public String getPublishedDateTime() {
         return publishedDateTime;
     }
 
-    public void setPublishedDateTime(LocalDateTime publishedDateTime) {
+    public void setPublishedDateTime(String publishedDateTime) {
         this.publishedDateTime = publishedDateTime;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {

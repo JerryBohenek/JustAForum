@@ -3,14 +3,14 @@ package com.jaf.justaforum.model;
 import java.time.LocalDateTime;
 
 public class User {
-    private Integer id;
+    private Long id;
     private String email;
     private String username;
     private String password;
     private LocalDateTime registrationDate;
     private short  active;
 
-    public User(Integer id, String username, String email, String password, LocalDateTime registrationDate, short  active) {
+    public User(Long id, String username, String email, String password, LocalDateTime registrationDate, short  active) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -27,7 +27,7 @@ public class User {
         this.active = active;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -49,7 +49,7 @@ public class User {
 
     public short  getActive() { return active; }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

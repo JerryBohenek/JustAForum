@@ -87,7 +87,7 @@ public class PostDao extends BaseDao {
         }
     }
 
-    public Optional<Post> findById(int id) {
+    public Optional<Post> findById(Long id) {
         final String query = """
                 SELECT
                     posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.users_id, users.username
@@ -99,7 +99,7 @@ public class PostDao extends BaseDao {
                 """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
                 return Optional.of(mapRow(resultSet));
@@ -111,12 +111,12 @@ public class PostDao extends BaseDao {
     }
 
     private Post mapRow(ResultSet resultSet) throws SQLException {
-        Integer id = resultSet.getInt("id");
+        Long id = resultSet.getLong("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
         PostCategory postCategory = PostCategory.valueOf(resultSet.getString("post_category"));
         LocalDateTime publishedDateTime = resultSet.getObject("published_date_time", LocalDateTime.class);
-        Integer  userId = resultSet.getObject("users_id", Integer.class);
+        Long  userId = resultSet.getLong("users_id");
         String  username = resultSet.getString("username");
 
         return new Post(id, title, content, postCategory, publishedDateTime, userId, username);

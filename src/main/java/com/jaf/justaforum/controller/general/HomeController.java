@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller;
+package com.jaf.justaforum.controller.general;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,12 +6,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
+import java.io.*;
 
-@WebServlet("/about-us")
-public class AboutUsController extends HttpServlet {
+@WebServlet("")
+public class HomeController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("WEB-INF/views/about.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request, response);
     }
 }

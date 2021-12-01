@@ -11,7 +11,6 @@
     <title>JaF</title>
 
     <%@ include file="../segments/stylesheets.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 
 <body>

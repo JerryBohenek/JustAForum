@@ -5,29 +5,29 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Token {
-    private Integer id;
+    private Long id;
     private String token;
     private LocalDateTime createdDate;
-    private Integer userId;
+    private Long userId;
 
-    public Token(Integer id, String token, LocalDateTime createdDate, Integer userId) {
+    public Token(Long id, String token, LocalDateTime createdDate, Long userId) {
         this.id = id;
         this.token = token;
         this.createdDate = createdDate;
         this.userId = userId;
     }
 
-    public Token(Integer userId) {
+    public Token(Long userId) {
         this.token = UUID.randomUUID().toString();
         this.createdDate = LocalDateTime.now();
         this.userId = userId;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,11 +47,11 @@ public class Token {
         this.createdDate = createdDate;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

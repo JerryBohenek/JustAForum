@@ -10,7 +10,7 @@
 
     <title>Sign up</title>
 
-    <%@ include file="../../segments/stylesheets.jspf" %>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap-4.6.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/auth.css">
 </head>
 

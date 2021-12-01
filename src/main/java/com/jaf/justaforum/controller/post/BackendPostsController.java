@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller;
+package com.jaf.justaforum.controller.post;
 
 import com.jaf.justaforum.model.PostCategory;
 import com.jaf.justaforum.service.PostService;

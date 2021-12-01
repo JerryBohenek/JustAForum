@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller;
+package com.jaf.justaforum.controller.auth;
 
 import com.jaf.justaforum.dao.UserDao;
 import com.jaf.justaforum.model.User;

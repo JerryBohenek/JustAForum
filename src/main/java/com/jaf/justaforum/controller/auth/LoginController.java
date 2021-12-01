@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller;
+package com.jaf.justaforum.controller.auth;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;

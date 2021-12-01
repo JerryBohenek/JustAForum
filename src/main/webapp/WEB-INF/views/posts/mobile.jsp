@@ -16,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/"><img alt="JaF"
-                                                                                src="${pageContext.request.contextPath}/resources/images/logo_white_narrow.png" style="height: 20px; width: 55px; margin-bottom: 4px;" class="d-inline-block"></a>
+                                              src="${pageContext.request.contextPath}/resources/images/logo_white_narrow.png" style="height: 20px; width: 55px; margin-bottom: 4px;" class="d-inline-block"></a>
         <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler"
                 data-target="#navbarCollapse" data-toggle="collapse" type="button">
@@ -48,7 +48,6 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About us</a>
                 </li>
             </ul>
-
             <form class="form-inline mt-2 mt-md-0">
                 <c:choose>
                     <c:when test="${empty pageContext.request.userPrincipal}">
@@ -71,8 +70,8 @@
 
     <section class="title text-center mb-3 jumbotron">
         <div class="container">
-            <h1 class="title-heading">Backend</h1>
-            <p class="lead text-muted mb-0">Api, databases, servers and much more.</p>
+            <h1 class="title-heading">Mobile</h1>
+            <p class="lead text-muted mb-0">Posts about mobile app development.</p>
         </div>
     </section>
 
@@ -81,7 +80,7 @@
 
             <div class="col-md-8">
 
-                <c:if test="${empty requestScope.backendPosts}">
+                <c:if test="${empty requestScope.mobilePosts}">
                     <div class="alert alert-info mb-4" role="alert">
                         <h4 class="alert-heading">Well</h4>
                         <p>There is no post in this category at the moment.</p>
@@ -91,7 +90,7 @@
                 <div class="p-3 rounded shadow-sm">
                     <h6 class="border-bottom text-light border-gray pb-2 mb-0">Posts</h6>
 
-                    <c:forEach items="${requestScope.backendPosts}" var="post">
+                    <c:forEach items="${requestScope.mobilePosts}" var="post">
                         <div class="media pt-3">
                             <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                                 <div class="d-flex justify-content-between align-items-center w-100">
@@ -124,9 +123,9 @@
                                 <div class="list-group">
                                     <a class="list-group-item list-group-item-action list-group-item-info"
                                        href="${pageContext.request.contextPath}/frontend">Frontend</a>
-                                    <a class="list-group-item list-group-item-action list-group-item-info active"
-                                       href="${pageContext.request.contextPath}/backend">Backend</a>
                                     <a class="list-group-item list-group-item-action list-group-item-info"
+                                       href="${pageContext.request.contextPath}/backend">Backend</a>
+                                    <a class="list-group-item list-group-item-action list-group-item-info active"
                                        href="${pageContext.request.contextPath}/mobile">Mobile</a>
                                 </div>
                             </div>

@@ -29,7 +29,7 @@ public class UserDao extends BaseDao {
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                user.setId(generatedKeys.getInt(1));
+                user.setId(generatedKeys.getLong(1));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -96,7 +96,7 @@ public class UserDao extends BaseDao {
         }
     }
 
-    public Optional<User> findById(int id) {
+    public Optional<User> findById(Long id) {
         final String query = """
                 SELECT
                     id, username, email, password, registration_date_time, active
@@ -107,7 +107,7 @@ public class UserDao extends BaseDao {
                 """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
                 return Optional.of(mapRow(resultSet));
@@ -118,7 +118,7 @@ public class UserDao extends BaseDao {
         }
     }
 
-    public void updateActive(Integer id, Short active) {
+    public void updateActive(Long id, Short active) {
         final String query = """
                         UPDATE
                             users
@@ -130,7 +130,7 @@ public class UserDao extends BaseDao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setShort(1, active);
-            statement.setInt(2, id);
+            statement.setLong(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -138,12 +138,12 @@ public class UserDao extends BaseDao {
     }
 
     private User mapRow(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
+        Long id = resultSet.getLong("id");
         String username = resultSet.getString("username");
         String email = resultSet.getString("email");
         String password = resultSet.getString("password");
         LocalDateTime registrationDate = resultSet.getObject("registration_date_time", LocalDateTime.class);
-        short  active = resultSet.getObject("active", Short.class);
+        short  active = resultSet.getShort("active");
 
         return new User(id, username, email, password, registrationDate, active);
     }
