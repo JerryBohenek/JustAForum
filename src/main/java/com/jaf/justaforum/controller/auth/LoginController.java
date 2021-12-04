@@ -1,8 +1,5 @@
 package com.jaf.justaforum.controller.auth;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HttpMethodConstraint;
 import jakarta.servlet.annotation.ServletSecurity;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +12,8 @@ import java.io.IOException;
 @WebServlet("/login")
 @ServletSecurity(
         httpMethodConstraints = {
-                @HttpMethodConstraint(value = "GET", rolesAllowed = "USER")
+                @HttpMethodConstraint(value = "GET", rolesAllowed = {"USER", "MODERATOR", "ADMIN"}),
+                @HttpMethodConstraint(value = "POST", rolesAllowed = {"USER", "MODERATOR", "ADMIN"})
         }
 )
 public class LoginController extends HttpServlet {

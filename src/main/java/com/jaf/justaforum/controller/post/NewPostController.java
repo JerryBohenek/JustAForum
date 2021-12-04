@@ -21,7 +21,8 @@ import java.util.Arrays;
 @WebServlet("/new-post")
 @ServletSecurity(
         httpMethodConstraints = {
-                @HttpMethodConstraint(value = "GET", rolesAllowed = "USER")
+                @HttpMethodConstraint(value = "GET", rolesAllowed = {"USER","MODERATOR","ADMIN"}),
+                @HttpMethodConstraint(value = "POST", rolesAllowed = {"USER","MODERATOR","ADMIN"})
         }
 )
 public class NewPostController extends HttpServlet {

@@ -1,6 +1,5 @@
 package com.jaf.justaforum.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

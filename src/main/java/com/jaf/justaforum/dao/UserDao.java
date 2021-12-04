@@ -1,6 +1,7 @@
 package com.jaf.justaforum.dao;
 
 import com.jaf.justaforum.model.User;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -14,11 +15,11 @@ public class UserDao extends BaseDao {
 
     private void saveUser(User user) {
         final String query = """
-                        INSERT INTO
-                            users (email, username,  password, registration_date_time, active)
-                        VALUES
-                            (?, ?, ?, ?, ?)
-                        """;
+                INSERT INTO
+                    users (email, username,  password, registration_date_time, active)
+                VALUES
+                    (?, ?, ?, ?, ?)
+                """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getEmail());
@@ -38,11 +39,11 @@ public class UserDao extends BaseDao {
 
     private void saveUserRole(User user) {
         final String query = """
-                        INSERT INTO
-                            user_role (username)
-                        VALUES
-                            (?)
-                        """;
+                INSERT INTO
+                    user_role (username)
+                VALUES
+                    (?)
+                """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, user.getUsername());
@@ -120,13 +121,13 @@ public class UserDao extends BaseDao {
 
     public void updateActive(Long id, Short active) {
         final String query = """
-                        UPDATE
-                            users
-                        SET
-                            active = ?
-                        WHERE
-                            id = ?
-                        """;
+                UPDATE
+                    users
+                SET
+                    active = ?
+                WHERE
+                    id = ?
+                """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setShort(1, active);
@@ -143,7 +144,7 @@ public class UserDao extends BaseDao {
         String email = resultSet.getString("email");
         String password = resultSet.getString("password");
         LocalDateTime registrationDate = resultSet.getObject("registration_date_time", LocalDateTime.class);
-        short  active = resultSet.getShort("active");
+        short active = resultSet.getShort("active");
 
         return new User(id, username, email, password, registrationDate, active);
     }

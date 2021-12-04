@@ -2,7 +2,6 @@ package com.jaf.justaforum.dao;
 
 import com.jaf.justaforum.model.Post;
 import com.jaf.justaforum.model.PostCategory;
-import com.jaf.justaforum.model.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -105,11 +104,11 @@ public class PostDao extends BaseDao {
 
     public void savePost(Post post) {
         final String query = """
-                        INSERT INTO
-                            posts (title, content, post_category, published_date_time, user_username)
-                        VALUES
-                            (?, ?, ?, ?, ?)
-                        """;
+                INSERT INTO
+                    posts (title, content, post_category, published_date_time, user_username)
+                VALUES
+                    (?, ?, ?, ?, ?)
+                """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, post.getTitle());
@@ -133,7 +132,7 @@ public class PostDao extends BaseDao {
         String content = resultSet.getString("content");
         PostCategory postCategory = PostCategory.valueOf(resultSet.getString("post_category"));
         LocalDateTime publishedDateTime = resultSet.getObject("published_date_time", LocalDateTime.class);
-        String  username = resultSet.getString("user_username");
+        String username = resultSet.getString("user_username");
 
         return new Post(id, title, content, postCategory, publishedDateTime, username);
 

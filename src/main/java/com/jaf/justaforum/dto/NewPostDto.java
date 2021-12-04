@@ -1,7 +1,5 @@
 package com.jaf.justaforum.dto;
 
-import com.jaf.justaforum.model.PostCategory;
-
 public class NewPostDto {
     private final String title;
     private final String content;
