@@ -8,25 +8,22 @@ public class Post {
     private String content;
     private PostCategory postCategory;
     private LocalDateTime publishedDateTime;
-    private Long userId;
     private String username;
 
-    public Post(Long id, String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, Long userId, String username) {
+    public Post(Long id, String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, String username) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.postCategory = postCategory;
         this.publishedDateTime = publishedDateTime;
-        this.userId = userId;
         this.username = username;
     }
 
-    public Post(String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, Long userId, String username) {
+    public Post(String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, String username) {
         this.title = title;
         this.content = content;
         this.postCategory = postCategory;
         this.publishedDateTime = publishedDateTime;
-        this.userId = userId;
         this.username = username;
     }
 
@@ -68,14 +65,6 @@ public class Post {
 
     public void setPublishedDateTime(LocalDateTime publishedDateTime) {
         this.publishedDateTime = publishedDateTime;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {

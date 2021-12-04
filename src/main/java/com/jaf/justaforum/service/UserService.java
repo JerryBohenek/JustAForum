@@ -2,6 +2,7 @@ package com.jaf.justaforum.service;
 
 import com.jaf.justaforum.dao.TokenDao;
 import com.jaf.justaforum.dao.UserDao;
+import com.jaf.justaforum.dto.UserRegistrationDto;
 import com.jaf.justaforum.model.Token;
 import com.jaf.justaforum.model.User;
 import com.jaf.justaforum.util.EmailUtil;
@@ -13,8 +14,8 @@ public class UserService {
     private final UserDao userDao = new UserDao();
     private final TokenDao tokenDao = new TokenDao();
 
-    public void register(UserRegistration userRegistration) {
-        User userToSave = UserMapper.map(userRegistration);
+    public void register(UserRegistrationDto userRegistrationDto) {
+        User userToSave = UserMapper.map(userRegistrationDto);
         try {
             hashPasswordWithSha256(userToSave);
             userDao.save(userToSave);
@@ -40,11 +41,11 @@ public class UserService {
     }
 
     private static class UserMapper {
-        static User map(UserRegistration userRegistration) {
+        static User map(UserRegistrationDto userRegistrationDto) {
             return new User(
-                    userRegistration.getUsername(),
-                    userRegistration.getEmail(),
-                    userRegistration.getPassword(),
+                    userRegistrationDto.getUsername(),
+                    userRegistrationDto.getEmail(),
+                    userRegistrationDto.getPassword(),
                     LocalDateTime.now(),
                     (short) 0
             );

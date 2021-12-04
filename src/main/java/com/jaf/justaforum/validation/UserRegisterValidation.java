@@ -5,7 +5,7 @@ import com.jaf.justaforum.exception.InvalidConfirmPasswordException;
 import com.jaf.justaforum.exception.InvalidEmailException;
 import com.jaf.justaforum.exception.InvalidPasswordException;
 import com.jaf.justaforum.exception.InvalidUsernameException;
-import com.jaf.justaforum.service.UserRegistration;
+import com.jaf.justaforum.dto.UserRegistrationDto;
 import com.jaf.justaforum.util.RegexChecker;
 
 public class UserRegisterValidation {
@@ -14,11 +14,11 @@ public class UserRegisterValidation {
     private static final String emailRegex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     private static final String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\\d\\s:]).{8,20}$";
 
-    public static void newUserValidation(UserRegistration userRegistration) throws InvalidUsernameException, InvalidPasswordException, InvalidEmailException, InvalidConfirmPasswordException {
-        usernameValidation(userRegistration.getUsername());
-        emailValidation(userRegistration.getEmail());
-        passwordValidation(userRegistration.getPassword());
-        confirmPasswordValidation(userRegistration.getPassword(),userRegistration.getConfirmPassword());
+    public static void newUserValidation(UserRegistrationDto userRegistrationDto) throws InvalidUsernameException, InvalidPasswordException, InvalidEmailException, InvalidConfirmPasswordException {
+        usernameValidation(userRegistrationDto.getUsername());
+        emailValidation(userRegistrationDto.getEmail());
+        passwordValidation(userRegistrationDto.getPassword());
+        confirmPasswordValidation(userRegistrationDto.getPassword(), userRegistrationDto.getConfirmPassword());
     }
 
     private static void usernameValidation(String username) throws InvalidUsernameException {

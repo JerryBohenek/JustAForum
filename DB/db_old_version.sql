@@ -45,12 +45,12 @@ CREATE TABLE IF NOT EXISTS `database`.`posts` (
   `content` LONGTEXT NOT NULL,
   `post_category` ENUM('FRONTEND', 'BACKEND', 'MOBILE') NOT NULL,
   `published_date_time` DATETIME NOT NULL,
-  `user_username` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`, `user_username`),
-  INDEX `fk_posts_users_username` (`user_username` ASC) VISIBLE,
+  `users_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `users_id`),
+  INDEX `fk_posts_users_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_posts_users`
-    FOREIGN KEY (`user_username`)
-    REFERENCES `database`.`users` (`username`)
+    FOREIGN KEY (`users_id`)
+    REFERENCES `database`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -66,19 +66,18 @@ CREATE TABLE IF NOT EXISTS `database`.`comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `comment` MEDIUMTEXT NOT NULL,
   `write_date_time` DATETIME NOT NULL,
-  `users_username` VARCHAR(50) NOT NULL,
+  `users_id` INT NOT NULL,
   `posts_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `users_username`, `posts_id`),
-  INDEX `fk_comments_users_username` (`users_username` ASC) INVISIBLE,
-  INDEX `fk_comments_posts_idx` (`posts_id` ASC) VISIBLE,
-  CONSTRAINT `fk_comments_posts`
-    FOREIGN KEY (`posts_id`)
-    REFERENCES `database`.`posts` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_comments_users`
-    FOREIGN KEY (`users_username`)
-    REFERENCES `database`.`users` (`username`)
+  `posts_users_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `users_id`, `posts_id`, `posts_users_id`),
+  INDEX `fk_comments_users1_idx` (`users_id` ASC) VISIBLE,
+  INDEX `fk_comments_posts1_idx` (`posts_id` ASC, `posts_users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_comments_posts1`
+    FOREIGN KEY (`posts_id` , `posts_users_id`)
+    REFERENCES `database`.`posts` (`id` , `users_id`),
+  CONSTRAINT `fk_comments_users1`
+    FOREIGN KEY (`users_id`)
+    REFERENCES `database`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB

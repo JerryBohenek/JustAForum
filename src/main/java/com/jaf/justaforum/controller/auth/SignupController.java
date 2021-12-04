@@ -4,7 +4,7 @@ import com.jaf.justaforum.exception.InvalidConfirmPasswordException;
 import com.jaf.justaforum.exception.InvalidEmailException;
 import com.jaf.justaforum.exception.InvalidPasswordException;
 import com.jaf.justaforum.exception.InvalidUsernameException;
-import com.jaf.justaforum.service.UserRegistration;
+import com.jaf.justaforum.dto.UserRegistrationDto;
 import com.jaf.justaforum.service.UserService;
 import com.jaf.justaforum.validation.UserRegisterValidation;
 import jakarta.servlet.ServletException;
@@ -27,11 +27,11 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            UserRegistration userRegistration = getUserData(request);
+            UserRegistrationDto userRegistrationDto = getUserData(request);
 
-            UserRegisterValidation.newUserValidation(userRegistration);
+            UserRegisterValidation.newUserValidation(userRegistrationDto);
 
-            userService.register(userRegistration);
+            userService.register(userRegistrationDto);
 
             request.setAttribute("confirmStart",("Activate your email: " + request.getParameter("email")));
             request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
@@ -51,12 +51,12 @@ public class SignupController extends HttpServlet {
         }
     }
 
-    private UserRegistration getUserData(HttpServletRequest request) {
+    private UserRegistrationDto getUserData(HttpServletRequest request) {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
 
-        return new UserRegistration(username, email, password, confirmPassword);
+        return new UserRegistrationDto(username, email, password, confirmPassword);
     }
 }

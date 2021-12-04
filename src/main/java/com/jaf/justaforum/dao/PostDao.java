@@ -2,13 +2,10 @@ package com.jaf.justaforum.dao;
 
 import com.jaf.justaforum.model.Post;
 import com.jaf.justaforum.model.PostCategory;
+import com.jaf.justaforum.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +16,9 @@ public class PostDao extends BaseDao {
         List<Post> posts = new ArrayList<>();
         final String query = """
                 SELECT
-                    posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.users_id, users.username
+                    posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.user_username
                 FROM
                     posts
-                JOIN users ON  posts.users_id = users.id
                 WHERE
                     posts.post_category = ?
                 ORDER BY posts.published_date_time DESC
@@ -45,12 +41,11 @@ public class PostDao extends BaseDao {
         List<Post> posts = new ArrayList<>();
         final String query = """
                 SELECT
-                    posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.users_id, users.username
+                    posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.user_username
                 FROM
                     posts
-                JOIN users ON  posts.users_id = users.id
                 WHERE
-                    users.username = ?
+                    posts.user_username = ?
                 ORDER BY posts.published_date_time DESC
                 """;
         try (Connection connection = getConnection();
@@ -72,9 +67,8 @@ public class PostDao extends BaseDao {
                     count(posts.id)
                 FROM
                     posts
-                JOIN users ON  users_id = users.id
                 WHERE
-                users.username = ?
+                posts.user_username = ?
                 """;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -90,10 +84,9 @@ public class PostDao extends BaseDao {
     public Optional<Post> findById(Long id) {
         final String query = """
                 SELECT
-                    posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.users_id, users.username
+                    posts.id, posts.title, posts.content, posts.post_category, posts.published_date_time, posts.user_username
                 FROM
                     posts
-                JOIN users ON  posts.users_id = users.id
                 WHERE
                     posts.id = ?
                 """;
@@ -110,16 +103,39 @@ public class PostDao extends BaseDao {
         }
     }
 
+    public void savePost(Post post) {
+        final String query = """
+                        INSERT INTO
+                            posts (title, content, post_category, published_date_time, user_username)
+                        VALUES
+                            (?, ?, ?, ?, ?)
+                        """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, post.getTitle());
+            statement.setString(2, post.getContent());
+            statement.setString(3, post.getPostCategory().toString());
+            statement.setObject(4, post.getPublishedDateTime());
+            statement.setObject(5, post.getUsername());
+            statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                post.setId(generatedKeys.getLong(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private Post mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
         PostCategory postCategory = PostCategory.valueOf(resultSet.getString("post_category"));
         LocalDateTime publishedDateTime = resultSet.getObject("published_date_time", LocalDateTime.class);
-        Long  userId = resultSet.getLong("users_id");
-        String  username = resultSet.getString("username");
+        String  username = resultSet.getString("user_username");
 
-        return new Post(id, title, content, postCategory, publishedDateTime, userId, username);
+        return new Post(id, title, content, postCategory, publishedDateTime, username);
 
     }
 }

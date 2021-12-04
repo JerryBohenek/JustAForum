@@ -70,7 +70,7 @@
 
     <div class="container py-5">
         <div class="row">
-            <c:if test="${requestScope.usernameError != null}">
+            <c:if test="${requestScope.commentError != null}">
                 <c:set value="is-invalid" var="invalidComment" />
             </c:if>
 
@@ -147,8 +147,7 @@
 
                                             <div>
                                                 <p class="badge badge-info text-wrap mb-1"><c:out value="${comment.username}"/></p>
-                                                <small
-                                                        class="ml-2 text-muted"><c:out value="${comment.writeDateTime}"/></small>
+                                                <small class="ml-2 text-muted"><c:out value="${comment.writeDateTime}"/></small>
                                             </div>
 
                                             <div class="btn-group btn-group-sm">

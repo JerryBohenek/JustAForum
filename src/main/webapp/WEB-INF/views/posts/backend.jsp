@@ -115,7 +115,7 @@
 
             <aside class="col-md-4 order-first order-md-last mb-4">
                 <div class="position-sticky-top-70">
-                    <a class="btn btn-outline-success btn-lg btn-block mb-2" href="${pageContext.request.contextPath}/my-posts/new-post"
+                    <a class="btn btn-outline-success btn-lg btn-block mb-2" href="${pageContext.request.contextPath}/new-post"
                        role="button">Add new post</a>
                     <div class="card bg-secondary">
                         <div class="card-body">
