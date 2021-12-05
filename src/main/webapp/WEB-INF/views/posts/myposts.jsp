@@ -106,7 +106,7 @@
                                 <a class="btn btn-outline-info btn-block mb-2" href="${pageContext.request.contextPath}/change-password" role="button">Change
                                     password</a>
                                 <button class="btn btn-outline-danger btn-block" data-toggle="modal"
-                                        attr="data-target='#deleteUser'+${requestScope.userId}"
+                                        data-target="#deleteUser" attr="data-target='#deleteUser'+${requestScope.userId}"
                                         type="button">Delete account
                                 </button>
 
@@ -179,7 +179,7 @@
 
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="deleteUserLabel" class="modal fade" role="dialog"
-     tabindex="-1" attr="id='deleteUser'+${requestScope.userId}">
+     tabindex="-1" attr="id='deleteUser'+${requestScope.userId}" id="deleteUser">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-light" style="background-color: #1b2127;">
             <div class="modal-header">
@@ -194,7 +194,7 @@
             <div class="modal-footer">
                 <button class="btn btn-info" data-dismiss="modal" type="button">No</button>
 
-                <form role="form" action="${pageContext.request.contextPath}/del-post?id=${requestScope.userId}" method="post">
+                <form role="form" action="${pageContext.request.contextPath}/del-user?id=${requestScope.userId}" method="post">
                     <button class="btn btn-danger" type="submit">Yes</button>
                 </form>
 
@@ -204,5 +204,10 @@
 </div>
 <%@ include file="../../segments/footer.jspf" %>
 <%@ include file="../../segments/scripts.jspf" %>
+<script>
+    $('#deleteUser').on('shown.bs.modal', function () {
+        $('#deleteUser').trigger('focus')
+    })
+</script>
 </body>
 </html>
