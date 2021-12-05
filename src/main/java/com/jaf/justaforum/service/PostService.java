@@ -18,17 +18,27 @@ public class PostService {
     public List<PostDto> getPostsByCategory(PostCategory postCategory) {
         List<Post> result = postDao.findByPostCategoryOrderByPublishedDateTimeDesc(postCategory);
 
-        return result.stream().map(PostConverter::createCategoryPostDto).collect(Collectors.toList());
+        return result.stream().map(PostConverter::createShortPostDto).collect(Collectors.toList());
     }
 
     public PostDto getPostById(Long id) throws RuntimeException, PostNotFoundException {
         return PostConverter.createPostDto(postDao.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found.")));
     }
 
+    public Long getNumberOfUserPosts(String username){
+        return postDao.countByUsername(username);
+    }
+
     public void addNewPost(NewPostDto newPostDto) {
         Post postToSave = PostMapper.map(newPostDto);
 
         postDao.savePost(postToSave);
+    }
+
+    public List<PostDto> getPostsByUsername(String username) {
+        List<Post> userPosts = postDao.findByUsernameOrderByPublishedDateTimeDesc(username);
+
+        return userPosts.stream().map(PostConverter::createShortPostDto).collect(Collectors.toList());
     }
 
     private static class PostMapper {

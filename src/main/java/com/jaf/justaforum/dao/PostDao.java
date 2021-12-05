@@ -73,8 +73,10 @@ public class PostDao extends BaseDao {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, username);
             ResultSet result = statement.executeQuery();
-
-            return result.getLong(0);
+            if(result.next()) {
+                return result.getLong(1);
+            }
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

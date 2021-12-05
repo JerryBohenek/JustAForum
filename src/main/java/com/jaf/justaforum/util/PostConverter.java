@@ -9,7 +9,7 @@ public class PostConverter {
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm:ss");
     private PostConverter() {}
 
-    public static PostDto createCategoryPostDto(Post source) {
+    public static PostDto createShortPostDto(Post source) {
         int charsInContent = 350;
 
         String shortContent = source.getContent();
