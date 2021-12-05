@@ -3,6 +3,7 @@ package com.jaf.justaforum.service;
 import com.jaf.justaforum.dao.PostDao;
 import com.jaf.justaforum.dto.NewPostDto;
 import com.jaf.justaforum.dto.PostDto;
+import com.jaf.justaforum.exception.NotAuthorizedException;
 import com.jaf.justaforum.exception.PostNotFoundException;
 import com.jaf.justaforum.model.Post;
 import com.jaf.justaforum.model.PostCategory;
@@ -10,6 +11,7 @@ import com.jaf.justaforum.util.PostConverter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PostService {
@@ -39,6 +41,10 @@ public class PostService {
         List<Post> userPosts = postDao.findByUsernameOrderByPublishedDateTimeDesc(username);
 
         return userPosts.stream().map(PostConverter::createShortPostDto).collect(Collectors.toList());
+    }
+
+    public void delPostById(Long id){
+        postDao.deletePost(id);
     }
 
     private static class PostMapper {

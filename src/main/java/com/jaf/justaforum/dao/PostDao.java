@@ -128,6 +128,22 @@ public class PostDao extends BaseDao {
         }
     }
 
+    public void deletePost(Long id) {
+        final String query = """
+                DELETE FROM
+                    posts
+                WHERE
+                    id = ?
+                """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private Post mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String title = resultSet.getString("title");

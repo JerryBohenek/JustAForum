@@ -104,7 +104,7 @@
                                                 </svg>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/single-post/del?id=${post.id}" method="post">
+                                                <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/del-post?id=${post.id}" method="post">
                                                     <button class="dropdown-item" type="submit">delete</button>
                                                 </form>
                                             </div>

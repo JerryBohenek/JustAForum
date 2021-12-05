@@ -6,7 +6,7 @@ import com.jaf.justaforum.exception.InvalidPostContentException;
 import com.jaf.justaforum.exception.InvalidPostTitleException;
 import com.jaf.justaforum.model.PostCategory;
 import com.jaf.justaforum.service.PostService;
-import com.jaf.justaforum.validation.NewPostValidation;
+import com.jaf.justaforum.validation.PostValidation;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HttpMethodConstraint;
 import jakarta.servlet.annotation.ServletSecurity;
@@ -39,7 +39,7 @@ public class NewPostController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             NewPostDto newPostDto = newPostDto(request);
-            NewPostValidation.newPostValidation(newPostDto);
+            PostValidation.newPostValidation(newPostDto);
             postService.addNewPost(newPostDto);
 
             request.setAttribute("confirmAddPost", "The post has been added");
