@@ -70,8 +70,8 @@
 
     <div class="container py-5">
         <div class="row">
-            <c:if test="${requestScope.commentError != null}">
-                <c:set value="is-invalid" var="invalidComment" />
+            <c:if test="${requestScope.commentContentError != null}">
+                <c:set value="is-invalid" var="invalidCommentContent" />
             </c:if>
 
             <c:choose>
@@ -120,11 +120,11 @@
 
                         <div class="my-3 p-3 rounded shadow-sm">
 
-                            <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/single-post/add/comment?id=${post.id}" method="post">
+                            <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/new-comment?id=${post.id}" method="post">
                                 <div class="input-group mb-3">
-                                <textarea class="form-control bg-light ${invalidComment}" id="content" placeholder="Write comment" rows="1"></textarea>
+                                <textarea class="form-control bg-light ${invalidCommentContent}" id="commnetContent" name="commnetContent" placeholder="Write comment" rows="1"></textarea>
                                     <div class="invalid-feedback">
-                                        <p><c:out value="${requestScope.commentError}" /></p>
+                                        <p><c:out value="${requestScope.commentContentError}" /></p>
                                     </div>
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-info" type="submit">Add comment</button>
@@ -160,7 +160,7 @@
                                                     </svg>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/single-post/del/comment?id=${comment.id}" method="post">
+                                                    <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/del-comment?id=${comment.id}" method="post">
                                                         <c:if test="${pageContext.request.userPrincipal.name == post.username}">
                                                             <button class="dropdown-item" type="submit">delete</button>
                                                         </c:if>

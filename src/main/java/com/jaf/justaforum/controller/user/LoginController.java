@@ -20,6 +20,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect("/");
+        String referer = request.getHeader("Referer");
+        response.sendRedirect(referer);
     }
 }
