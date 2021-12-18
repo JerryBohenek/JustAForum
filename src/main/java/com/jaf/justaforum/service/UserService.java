@@ -11,7 +11,6 @@ import com.jaf.justaforum.util.EmailUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 public class UserService {
     private final UserDao userDao = new UserDao();
@@ -49,6 +48,10 @@ public class UserService {
 
     public void delUserById(Long id) throws UserNotFoundException, NotAuthorizedException {
         userDao.deleteById(id);
+    }
+
+    public void changePassword(String username, String newPassword) {
+        userDao.updatePasswordByUsername(username, DigestUtils.sha256Hex(newPassword));
     }
 
     private static class UserMapper {

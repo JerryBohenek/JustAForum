@@ -154,6 +154,25 @@ public class UserDao extends BaseDao {
         }
     }
 
+    public void updatePasswordByUsername(String username, String newPassword) {
+        final String query = """
+                UPDATE 
+                users
+                SET 
+                password = ?
+                WHERE 
+                username = ?
+                """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, newPassword);
+            statement.setString(2, username);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private User mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String username = resultSet.getString("username");

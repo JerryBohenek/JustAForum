@@ -6,7 +6,7 @@ import com.jaf.justaforum.exception.InvalidPasswordException;
 import com.jaf.justaforum.exception.InvalidUsernameException;
 import com.jaf.justaforum.dto.UserRegistrationDto;
 import com.jaf.justaforum.service.UserService;
-import com.jaf.justaforum.validation.UserRegisterValidation;
+import com.jaf.justaforum.validation.UserValidation;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,7 +29,7 @@ public class SignupController extends HttpServlet {
         try {
             UserRegistrationDto userRegistrationDto = getUserData(request);
 
-            UserRegisterValidation.newUserValidation(userRegistrationDto);
+            UserValidation.newUserValidation(userRegistrationDto);
 
             userService.register(userRegistrationDto);
 

@@ -100,8 +100,6 @@
         <p class="mb-1">Just a Forum</p>
     </footer>
 </div>
-
 <%@ include file="../../segments/scripts.jspf" %>
-
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="Forum for developers" name="description">
-    <meta content="Grupa 2" name="author">
+    <meta content="JAF Group" name="author">
 
     <title>JaF</title>
     <%@ include file="../../segments/stylesheets.jspf" %>

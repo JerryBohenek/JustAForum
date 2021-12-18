@@ -3,7 +3,6 @@ package com.jaf.justaforum.controller.user;
 import com.jaf.justaforum.exception.NotAuthorizedException;
 import com.jaf.justaforum.exception.UserNotFoundException;
 import com.jaf.justaforum.service.UserService;
-import com.jaf.justaforum.validation.PostValidation;
 import com.jaf.justaforum.validation.UserValidation;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HttpMethodConstraint;
