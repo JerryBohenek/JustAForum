@@ -138,6 +138,22 @@ public class UserDao extends BaseDao {
         }
     }
 
+    public void deleteById(Long id) {
+        final String query = """
+                DELETE FROM
+                    users
+                WHERE
+                    id = ?
+                """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private User mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String username = resultSet.getString("username");

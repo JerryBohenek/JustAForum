@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller.auth;
+package com.jaf.justaforum.controller.user;
 
 import jakarta.servlet.annotation.HttpMethodConstraint;
 import jakarta.servlet.annotation.ServletSecurity;

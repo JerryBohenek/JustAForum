@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller.auth;
+package com.jaf.justaforum.controller.user;
 
 import com.jaf.justaforum.exception.InvalidConfirmPasswordException;
 import com.jaf.justaforum.exception.InvalidEmailException;

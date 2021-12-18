@@ -3,15 +3,15 @@ package com.jaf.justaforum.service;
 import com.jaf.justaforum.dao.TokenDao;
 import com.jaf.justaforum.dao.UserDao;
 import com.jaf.justaforum.dto.UserRegistrationDto;
-import com.jaf.justaforum.exception.PostNotFoundException;
+import com.jaf.justaforum.exception.NotAuthorizedException;
 import com.jaf.justaforum.exception.UserNotFoundException;
 import com.jaf.justaforum.model.Token;
 import com.jaf.justaforum.model.User;
 import com.jaf.justaforum.util.EmailUtil;
-import com.jaf.justaforum.util.PostConverter;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class UserService {
     private final UserDao userDao = new UserDao();
@@ -45,6 +45,10 @@ public class UserService {
 
     public User getUserByUsername(String username) throws UserNotFoundException {
         return userDao.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User not found."));
+    }
+
+    public void delUserById(Long id) throws UserNotFoundException, NotAuthorizedException {
+        userDao.deleteById(id);
     }
 
     private static class UserMapper {

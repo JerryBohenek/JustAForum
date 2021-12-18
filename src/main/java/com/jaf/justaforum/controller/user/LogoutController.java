@@ -1,4 +1,4 @@
-package com.jaf.justaforum.controller.auth;
+package com.jaf.justaforum.controller.user;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
