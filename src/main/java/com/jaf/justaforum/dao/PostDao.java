@@ -128,7 +128,7 @@ public class PostDao extends BaseDao {
         }
     }
 
-    public void deletePost(Long id) {
+    public void deletePostById(Long id) {
         final String query = """
                 DELETE FROM
                     posts

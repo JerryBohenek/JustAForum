@@ -24,6 +24,10 @@ public class CommentService {
         return result.stream().map(CommentConverter::createCommentDto).collect(Collectors.toList());
     }
 
+    public void delCommentById(Long id) {
+        commentDao.deleteCommentById(id);
+    }
+
     private static class CommentMapper {
         static Comment map(NewCommentDto newCommentDto) {
             return new Comment(

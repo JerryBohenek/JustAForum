@@ -3,7 +3,6 @@ package com.jaf.justaforum.service;
 import com.jaf.justaforum.dao.PostDao;
 import com.jaf.justaforum.dto.NewPostDto;
 import com.jaf.justaforum.dto.PostDto;
-import com.jaf.justaforum.exception.NotAuthorizedException;
 import com.jaf.justaforum.exception.PostNotFoundException;
 import com.jaf.justaforum.model.Post;
 import com.jaf.justaforum.model.PostCategory;
@@ -43,7 +42,7 @@ public class PostService {
     }
 
     public void delPostById(Long id){
-        postDao.deletePost(id);
+        postDao.deletePostById(id);
     }
 
     private static class PostMapper {

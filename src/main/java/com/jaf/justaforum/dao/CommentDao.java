@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CommentDao extends BaseDao {
 
@@ -53,6 +54,44 @@ public class CommentDao extends BaseDao {
             }
             return comments;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Optional<Comment> findById(Long id) {
+        final String query = """
+                SELECT
+                    comments.id, comments.comment, comments.write_date_time, comments.users_username, comments.posts_id
+                FROM
+                    comments
+                WHERE
+                    comments.id = ?
+                """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+                return Optional.of(mapRow(resultSet));
+            else
+                return Optional.empty();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteCommentById(Long id) {
+        final String query = """
+                DELETE FROM
+                    comments
+                WHERE
+                    comments.id = ?
+                """;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

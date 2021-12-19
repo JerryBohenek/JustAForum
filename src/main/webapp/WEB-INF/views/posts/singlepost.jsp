@@ -100,7 +100,7 @@
                                                     data-toggle="dropdown" type="button">
                                                 <svg class="bi bi-three-dots-vertical" fill="currentColor" height="16" viewBox="0 0 16 16"
                                                      width="16" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
                                                 </svg>
                                             </button>
                                             <div class="dropdown-menu">
@@ -156,12 +156,12 @@
                                                         data-toggle="dropdown" type="button">
                                                     <svg class="bi bi-three-dots-vertical" fill="currentColor" height="16"
                                                          viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
                                                     </svg>
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <form class="needs-validation" role="form" action="${pageContext.request.contextPath}/del-comment?id=${comment.id}" method="post">
-                                                        <c:if test="${pageContext.request.userPrincipal.name == post.username}">
+                                                        <c:if test="${pageContext.request.userPrincipal.name == comment.username}">
                                                             <button class="dropdown-item" type="submit">delete</button>
                                                         </c:if>
                                                     </form>
