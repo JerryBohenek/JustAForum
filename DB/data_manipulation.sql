@@ -2,6 +2,7 @@ SELECT * FROM users;
 SELECT * FROM user_role;
 SELECT * FROM tokens;
 SELECT * FROM posts;
+SELECT * FROM comments;
 
 DELETE FROM users;
 DELETE FROM user_role;

@@ -153,6 +153,5 @@ public class PostDao extends BaseDao {
         String username = resultSet.getString("user_username");
 
         return new Post(id, title, content, postCategory, publishedDateTime, username);
-
     }
 }
