@@ -2,6 +2,7 @@ package com.jaf.justaforum.model;
 
 import java.time.LocalDateTime;
 
+//model odzwierciedlający post znajdujący się w bazie danych
 public class Post {
     private Long id;
     private String title;
@@ -10,6 +11,7 @@ public class Post {
     private LocalDateTime publishedDateTime;
     private String username;
 
+    //konstruktor klasy Post
     public Post(Long id, String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, String username) {
         this.id = id;
         this.title = title;
@@ -18,7 +20,8 @@ public class Post {
         this.publishedDateTime = publishedDateTime;
         this.username = username;
     }
-
+	 
+	 //konstruktor klasy Post bez id posta
     public Post(String title, String content, PostCategory postCategory, LocalDateTime publishedDateTime, String username) {
         this.title = title;
         this.content = content;

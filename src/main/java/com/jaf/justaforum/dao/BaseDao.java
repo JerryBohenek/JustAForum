@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class BaseDao {
     private final DataSource dataSource;
 
+    //konstruktor BaseDao
     public BaseDao() {
         try {
             this.dataSource = DatabaseConfig.getDataSource();
@@ -17,7 +18,8 @@ public class BaseDao {
             throw new RuntimeException(e);
         }
     }
-
+	 
+    //metoda zwracająca obiekt Connection potrzebny do komunikacji z bazą danych
     public Connection getConnection() {
         try {
             return dataSource.getConnection();

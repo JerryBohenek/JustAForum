@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class TokenDao extends BaseDao {
 
+    //zapisuje token do bazy danych
     public void saveToken(Token token) {
         final String query = """
                 INSERT INTO
@@ -29,6 +30,7 @@ public class TokenDao extends BaseDao {
         }
     }
 
+    //usuwa token z bazy danych
     public void deleteToken(Long id) {
         final String query = """
                 DELETE FROM
@@ -45,6 +47,7 @@ public class TokenDao extends BaseDao {
         }
     }
 
+    //zwraca token po jego nazwie
     public Optional<Token> findByToken(String token) {
         final String query = """
                 SELECT
@@ -66,7 +69,8 @@ public class TokenDao extends BaseDao {
             throw new RuntimeException(e);
         }
     }
-
+    
+	 //mapper konwertujący obiekt klasy ResultSet na obiekt klasy Token
     private Token mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String token = resultSet.getString("token");

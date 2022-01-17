@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany przez j_security_check do logowania
 @WebServlet("/login")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -17,7 +18,8 @@ import java.io.IOException;
         }
 )
 public class LoginController extends HttpServlet {
-
+    
+	 //zwraca widok porzednio odwiedzanej strony
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String referer = request.getHeader("Referer");

@@ -15,6 +15,7 @@ public class UserValidation {
     private static final String emailRegex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     private static final String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\\d\\s:]).{8,20}$";
 
+    //sprawdza czy usuwany user istnieje w bazie danych oraz czy możemy usunąć to konto
     public static void delUserValidation(String username, Long id) throws UserNotFoundException, NotAuthorizedException {
         Optional<User> optionalUser = userDao.findById(id);
 
@@ -22,6 +23,7 @@ public class UserValidation {
         if (!optionalUser.get().getUsername().equals(username)) throw new NotAuthorizedException("You are not authorized!");
     }
 
+    //sprawdza czy podane dane podczas rejestracji są prawidłowe
     public static void newUserValidation(UserRegistrationDto userRegistrationDto) throws InvalidUsernameException, InvalidPasswordException, InvalidEmailException, InvalidConfirmPasswordException {
         usernameValidation(userRegistrationDto.getUsername());
         emailValidation(userRegistrationDto.getEmail());
@@ -29,6 +31,7 @@ public class UserValidation {
         confirmPasswordValidation(userRegistrationDto.getPassword(), userRegistrationDto.getConfirmPassword());
     }
 
+    //sprawdza czy nazwa użytkownika jest prawidłowa (od 6 do 30 znaków, zaczyna się od litery oraz nie zawiera innych znaków niż alfanumeryczne oraz "_")
     public static void usernameValidation(String username) throws InvalidUsernameException {
         String errorMessage = "";
 
@@ -48,6 +51,7 @@ public class UserValidation {
         }
     }
 
+    //sprawdza czy podano prawidłowy email (czy posiada znak @ itp. oraz czy już nie istnieje podany email w bazie danych)
     public static void emailValidation(String email) throws InvalidEmailException {
         String errorMessage = "";
 
@@ -65,6 +69,7 @@ public class UserValidation {
         }
     }
 
+    //sprawdza czy podane hasło jest odpowiednio silne (od 8 do 20 znaków, zawiera co najmniej jeden znak specjalny itp.)
     public static void passwordValidation(String password) throws InvalidPasswordException {
         String errorMessage = "";
 
@@ -80,12 +85,14 @@ public class UserValidation {
         }
     }
 
+    //sprawdza czy hasło oraz hasło z pola "powtwierdź hasło" są takie same
     public static void confirmPasswordValidation(String password, String confirmPassword) throws InvalidConfirmPasswordException {
         if(!password.equals(confirmPassword)){
             throw new InvalidConfirmPasswordException("Those passwords didn’t match.");
         }
     }
 
+    //sprawdza czy podczas zmieniania hasła, podaliśmy prawidłowe stare hasło
     public static void oldPasswordValidation(String username, String oldPassword) throws InvalidOldPasswordException, UserNotFoundException {
         String userPasswordHash = userDao.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User not found.")).getPassword();
         String oldPasswordHash = DigestUtils.sha256Hex(oldPassword);

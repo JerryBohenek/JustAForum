@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do tworzenia komentarzy
 @WebServlet("/new-comment")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -24,6 +25,7 @@ import java.io.IOException;
 public class NewCommentController extends HttpServlet {
     private final CommentService commentService = new CommentService();
 
+    //tworzy komentarz
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

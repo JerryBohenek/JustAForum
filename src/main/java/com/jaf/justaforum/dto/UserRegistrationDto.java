@@ -1,11 +1,13 @@
 package com.jaf.justaforum.dto;
 
+//klasa wykorzystywana do przyjmowania użytkownika podczas rejestracji
 public class UserRegistrationDto {
     private final String username;
     private final String email;
     private final String password;
     private final String confirmPassword;
 
+    //konstruktor klasy UserRegistrationDto
     public UserRegistrationDto(String username, String email, String password, String confirmPassword) {
         this.username = username;
         this.email = email;

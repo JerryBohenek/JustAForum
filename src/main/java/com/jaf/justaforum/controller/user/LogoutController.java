@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do wylogowywania użytkownika
 @WebServlet("/logout")
 public class LogoutController extends HttpServlet {
+
+    //wylogowywuje użytkownika
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.logout();

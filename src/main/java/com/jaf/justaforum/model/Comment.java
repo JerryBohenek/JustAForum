@@ -2,6 +2,7 @@ package com.jaf.justaforum.model;
 
 import java.time.LocalDateTime;
 
+//model odzwierciedlający komentarz znajdujący się w bazie danych
 public class Comment {
     private Long id;
     private String content;
@@ -9,6 +10,7 @@ public class Comment {
     private String username;
     private Long postsId;
 
+    //konstruktor klasy Comment
     public Comment(Long id, String content, LocalDateTime writeDateTime, String username, Long postsId) {
         this.id = id;
         this.content = content;
@@ -16,7 +18,9 @@ public class Comment {
         this.username = username;
         this.postsId = postsId;
     }
-
+    
+	 
+	 //konstruktor klasy Comment bez podania id posta
     public Comment(String content, LocalDateTime writeDateTime, String username, Long postsId) {
         this.content = content;
         this.writeDateTime = writeDateTime;

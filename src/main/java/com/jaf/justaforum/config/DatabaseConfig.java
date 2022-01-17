@@ -9,8 +9,10 @@ public class DatabaseConfig {
 
     private static DataSource dataSource;
 
+    //prywatny konstruktor, aby nie tworzyć instancji klasy
     private DatabaseConfig() { }
 
+    //konfiguruje bazę danych mysql
     public static DataSource getDataSource() throws NamingException {
         if (dataSource == null) {
             Context initContext = new InitialContext();

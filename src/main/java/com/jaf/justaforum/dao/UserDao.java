@@ -8,11 +8,13 @@ import java.util.Optional;
 
 public class UserDao extends BaseDao {
 
+    //zapisuje użytkownika oraz jego role w bazie danych
     public void save(User user) {
         saveUser(user);
         saveUserRole(user);
     }
-
+	 
+	 //zapisuje użytkownika w bazie danych
     private void saveUser(User user) {
         final String query = """
                 INSERT INTO
@@ -37,6 +39,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //zapisuje role użytkownika w bazie danych
     private void saveUserRole(User user) {
         final String query = """
                 INSERT INTO
@@ -52,7 +55,8 @@ public class UserDao extends BaseDao {
             throw new RuntimeException(e);
         }
     }
-
+	 
+    //zwraca użytkownika o podanej nazwie
     public Optional<User> findByUsername(String username) {
         final String query = """
                 SELECT
@@ -75,6 +79,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //zwraca użytkownika z bazy danych o podanym adresie email
     public Optional<User> findByEmail(String email) {
         final String query = """
                 SELECT
@@ -97,6 +102,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //zwraca użytkownika o podanym id
     public Optional<User> findById(Long id) {
         final String query = """
                 SELECT
@@ -119,6 +125,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //modyfikuje pole "active" użytkownikowi o podanym id
     public void updateActive(Long id, Short active) {
         final String query = """
                 UPDATE
@@ -138,6 +145,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //usuwa użytkownika o podanym id
     public void deleteById(Long id) {
         final String query = """
                 DELETE FROM
@@ -154,6 +162,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //zmienia hasło użytkownika o podanej nazwie
     public void updatePasswordByUsername(String username, String newPassword) {
         final String query = """
                 UPDATE 
@@ -173,6 +182,7 @@ public class UserDao extends BaseDao {
         }
     }
 
+    //mapper konwertujący obiekt klasy ResultSet na obiekt klasy User
     private User mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String username = resultSet.getString("username");

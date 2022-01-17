@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
+//serwlet wykorzystywany do tworzenia posta
 @WebServlet("/new-post")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -27,7 +28,8 @@ import java.util.Arrays;
 )
 public class NewPostController extends HttpServlet {
     private final PostService postService = new PostService();
-
+    
+	 //zwraca widok, który umożliwia dodanie posta
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("postCategory", Arrays.asList(PostCategory.values()));
@@ -35,6 +37,7 @@ public class NewPostController extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/views/posts/newpost.jsp").forward(request, response);
     }
 
+    //dodaje post
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

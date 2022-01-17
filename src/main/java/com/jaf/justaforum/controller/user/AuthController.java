@@ -11,10 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+//serwlet wykorzystywany do logowania użytkownika
 @WebServlet("/auth")
 public class AuthController extends HttpServlet {
     private final UserDao userDao = new UserDao();
 
+    //loguje użytkownika oraz sprawdza czy użytkownik zaznaczył opcje "remember me"
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
@@ -32,7 +34,8 @@ public class AuthController extends HttpServlet {
             response.sendRedirect(url);
         }
     }
-
+	 
+    //zwraca widok, który informuje użytkownika o podaniu błędnej nazwy lub hasła
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.sendRedirect("/login?error=true");

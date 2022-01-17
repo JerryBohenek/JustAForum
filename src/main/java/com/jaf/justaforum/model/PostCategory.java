@@ -1,5 +1,6 @@
 package com.jaf.justaforum.model;
 
+//model odzwierciedlający kategorie postów
 public enum PostCategory {
     FRONTEND {
         @Override

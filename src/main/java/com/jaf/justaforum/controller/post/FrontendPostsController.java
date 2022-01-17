@@ -10,10 +10,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do zwracania postów z kategorii "frontend"
 @WebServlet("/frontend")
 public class FrontendPostsController extends HttpServlet {
 private final PostService postService = new PostService();
 
+    //pokazuje widok postów z kategorii "frontend"
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("frontendPosts", postService.getPostsByCategory(PostCategory.FRONTEND));

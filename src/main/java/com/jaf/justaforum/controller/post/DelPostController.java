@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do usuwania posta
 @WebServlet("/del-post")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -24,6 +25,7 @@ import java.io.IOException;
 public class DelPostController extends HttpServlet {
     private final PostService postService = new PostService();
 
+    //usuwa post
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

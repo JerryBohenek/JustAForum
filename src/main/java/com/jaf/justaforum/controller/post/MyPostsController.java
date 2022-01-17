@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do zwracania postów użytownika
 @WebServlet("/my-posts")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -25,6 +26,7 @@ public class MyPostsController extends HttpServlet {
     private final PostService postService = new PostService();
     private final UserService userService = new UserService();
 
+    //zwraca posty użytkownika
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {

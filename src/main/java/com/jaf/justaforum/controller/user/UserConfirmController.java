@@ -12,11 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+//serwlet wykorzystywany do potwierdzenia użytownika za pomocą maila
 @WebServlet("/confirm")
 public class UserConfirmController extends HttpServlet {
     private final TokenDao tokenDao = new TokenDao();
     private final UserService userService = new UserService();
 
+    //zwraca widok, który informuje użytkownika czy konto zostało aktywowane
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String token = request.getParameter("token");

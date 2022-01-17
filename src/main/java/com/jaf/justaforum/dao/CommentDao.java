@@ -15,6 +15,7 @@ import java.util.Optional;
 
 public class CommentDao extends BaseDao {
 
+    //zapisuje komentarz do bazy danych
     public void saveComment(Comment comment) {
         final String query = """
                 INSERT INTO
@@ -34,6 +35,7 @@ public class CommentDao extends BaseDao {
         }
     }
 
+    //zwraca listę komentarzy posta o podanym id, lista jest posortowana według daty napisania malejąco
     public List<Comment> findByPostIdOrderByWriteDateTimeDesc(Long id) {
         List<Comment> comments = new ArrayList<>();
         final String query = """
@@ -59,6 +61,7 @@ public class CommentDao extends BaseDao {
         }
     }
 
+    //zwraca komentarz o podanym id
     public Optional<Comment> findById(Long id) {
         final String query = """
                 SELECT
@@ -81,6 +84,7 @@ public class CommentDao extends BaseDao {
         }
     }
 
+    //usuwa komentarz o podanym id
     public void deleteCommentById(Long id) {
         final String query = """
                 DELETE FROM
@@ -97,6 +101,7 @@ public class CommentDao extends BaseDao {
         }
     }
 
+    //mapper konwertująćy obiekt klasy ResultSet na obiekt klasy Comment
     private Comment mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String content = resultSet.getString("comment");

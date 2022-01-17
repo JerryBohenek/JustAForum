@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do zmiany hasłą
 @WebServlet("/change-password")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -26,6 +27,7 @@ import java.io.IOException;
 public class ChangePasswordController extends HttpServlet {
     private final UserService userService = new UserService();
 
+    //zmienia hasło
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -55,6 +57,7 @@ public class ChangePasswordController extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/views/auth/change-password.jsp").forward(request, response);
     }
 
+    //zwraca widok, gdzie użytkownik może zmienić hasło
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getRequestDispatcher("WEB-INF/views/auth/change-password.jsp").forward(request, response);

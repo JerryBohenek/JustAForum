@@ -14,11 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//serwket wykorzystywany do pokazania pojedynczego posta wraz z komentarzami
 @WebServlet("/single-post")
 public class SinglePostController extends HttpServlet {
     private final PostService postService = new PostService();
     private final CommentService commentService = new CommentService();
 
+    //zwraca widok pojedynczego posta wraz z jego komentarzami
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {

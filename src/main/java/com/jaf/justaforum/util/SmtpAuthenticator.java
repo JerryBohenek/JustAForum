@@ -4,10 +4,13 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
 public class SmtpAuthenticator extends Authenticator {
-    public SmtpAuthenticator() {
+    
+	 //konstruktor klasy SmtpAuthenticator
+	 public SmtpAuthenticator() {
         super();
     }
 
+    //zwraca obiekt klasy PasswordAuthentication o podanych danych logowania do skrzynki
     @Override
     public PasswordAuthentication getPasswordAuthentication() {
         String username = "justaforummail@gmail.com";

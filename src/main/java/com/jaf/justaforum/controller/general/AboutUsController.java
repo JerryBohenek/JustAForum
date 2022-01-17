@@ -8,9 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do wyświetlania strony "about-us"
 @WebServlet("/about-us")
 public class AboutUsController extends HttpServlet {
-    @Override
+    
+	 //wyświetla strone "about-us"
+	 @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getRequestDispatcher("WEB-INF/views/about.jsp").forward(request, response);
     }

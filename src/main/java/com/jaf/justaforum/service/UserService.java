@@ -16,6 +16,11 @@ public class UserService {
     private final UserDao userDao = new UserDao();
     private final TokenDao tokenDao = new TokenDao();
 
+    /*
+	 metoda przyjmuje obiekt klasy UserRegistrationDto zawięrający dane użytkownika podane podczas rejestracji,
+	 hashuje hasło, zapisuję użytkownika do bazy danych, generuje token po czym wysyła go na maila podanego
+	 przez użytkownika (w skrócie rejestracja użytkownika)
+	 */
     public void register(UserRegistrationDto userRegistrationDto) {
         User userToSave = UserMapper.map(userRegistrationDto);
         try {
@@ -29,12 +34,13 @@ public class UserService {
         }
     }
 
-
+    //zamiana jawnego hasła usera na hashowanie za pomocą "Sha256"
     private void hashPasswordWithSha256(User user) throws NoSuchAlgorithmException {
         String sha256Password = DigestUtils.sha256Hex(user.getPassword());
         user.setPassword(sha256Password);
     }
 
+    //ustawia usera jako "aktywny" po potwierdzeniu maila
     public void confirmUser(Token token) {
         Short active = 1;
 
@@ -42,18 +48,22 @@ public class UserService {
         tokenDao.deleteToken(token.getId());
     }
 
+    //przyjmuje nazwę uzytkownika, po czym go zwraca z bazy danych
     public User getUserByUsername(String username) throws UserNotFoundException {
         return userDao.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User not found."));
     }
 
+    //przyjmuje id usera po czym go usuwa
     public void delUserById(Long id) throws UserNotFoundException, NotAuthorizedException {
         userDao.deleteById(id);
     }
 
+    //przyjmuje username oraz nowe hasło, po czym zmienia hasło podanemu użytkownikowi
     public void changePassword(String username, String newPassword) {
         userDao.updatePasswordByUsername(username, DigestUtils.sha256Hex(newPassword));
     }
 
+    //maper, który konwertuje obiekt klasy UserRegistrationDto na obiekt klasy User
     private static class UserMapper {
         static User map(UserRegistrationDto userRegistrationDto) {
             return new User(

@@ -10,6 +10,7 @@ import java.util.Properties;
 
 public class EmailUtil {
 
+    //konfiguruje skrzynke po czym wysyła emaila z tokenem do potwierdzenia rejestracji
     public static void sendActivationEmail(String mailRecipient, String token) {
 
         String from = "justaforummail@gmail.com";

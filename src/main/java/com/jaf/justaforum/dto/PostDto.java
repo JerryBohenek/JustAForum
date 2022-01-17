@@ -2,6 +2,7 @@ package com.jaf.justaforum.dto;
 
 import com.jaf.justaforum.model.PostCategory;
 
+//klasa wykorzystywana do wyświetlania postów
 public class PostDto {
     private Long id;
     private String title;
@@ -10,6 +11,7 @@ public class PostDto {
     private String publishedDateTime;
     private String username;
 
+    //konstruktor klasy PostDto
     public PostDto(Long id, String title, String content, PostCategory postCategory, String publishedDateTime, String username) {
         this.id = id;
         this.title = title;

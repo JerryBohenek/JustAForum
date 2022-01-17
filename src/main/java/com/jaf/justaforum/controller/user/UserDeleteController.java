@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do usuwania użytkownika
 @WebServlet("/del-user")
 @ServletSecurity(
         httpMethodConstraints = {
@@ -23,6 +24,7 @@ import java.io.IOException;
 public class UserDeleteController extends HttpServlet {
     private final UserService userService = new UserService();
 
+    //usuwa użytkownika
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

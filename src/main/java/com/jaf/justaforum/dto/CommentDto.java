@@ -1,11 +1,14 @@
 package com.jaf.justaforum.dto;
 
+
+//klasa wykorzystywana do wyświetlania komentarzy
 public class CommentDto {
     private Long id;
     private String content;
     private String writeDateTime;
     private String username;
-
+    
+	 //konstruktor klasy CommentDto
     public CommentDto(Long id, String content, String writeDateTime, String username) {
         this.id = id;
         this.content = content;

@@ -11,12 +11,14 @@ import java.util.Optional;
 public class CommentValidation {
     private static final CommentDao commentDao = new CommentDao();
 
+	 //sprawdza czy komentarz nie jest krótszy niż 3 znaki
     public static void newCommentValidation(String commentContent) throws InvalidCommentContentException {
         if (commentContent == null || commentContent.length() < 3) {
             throw new InvalidCommentContentException("Post must be at least 3 characters long.");
         }
     }
-
+   
+	 //sprawdza czy usuwany komentarz istnieje oraz czy jest to nasz komentarz
     public static void deleteCommentValidation(String username, Long id) throws CommentNotFoundException, NotAuthorizedException {
         Optional<Comment> optionalComment = commentDao.findById(id);
 

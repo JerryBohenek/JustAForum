@@ -15,15 +15,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+//serwlet wykorzystywany do rejestracji
 @WebServlet("/signup")
 public class SignupController extends HttpServlet {
     private final UserService userService = new UserService();
 
+    //zwraca formularz rejestracyjny
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getRequestDispatcher("/WEB-INF/views/auth/signup.jsp").forward(request, response);
     }
 
+    //tworzy nowego użytkownika
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

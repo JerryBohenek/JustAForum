@@ -1,10 +1,12 @@
 package com.jaf.justaforum.dto;
 
+//klasa wykorzystywana do przyjmowania komentarzy od użytkownika
 public class NewCommentDto {
     private String content;
     private String username;
     private Long postsId;
 
+    //konstruktor klasy NewCommentDto
     public NewCommentDto(String content, String username, Long postsId) {
         this.content = content;
         this.username = username;

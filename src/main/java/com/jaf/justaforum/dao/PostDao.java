@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class PostDao extends BaseDao {
 
+    //zwraca listę postów o podanej kategorii posortowaną malejąco według daty
     public List<Post> findByPostCategoryOrderByPublishedDateTimeDesc(PostCategory postCategory) {
         List<Post> posts = new ArrayList<>();
         final String query = """
@@ -36,6 +37,7 @@ public class PostDao extends BaseDao {
         }
     }
 
+    //zwraca listę postów danego użytkownika
     public List<Post> findByUsernameOrderByPublishedDateTimeDesc(String username) {
         List<Post> posts = new ArrayList<>();
         final String query = """
@@ -60,6 +62,7 @@ public class PostDao extends BaseDao {
         }
     }
 
+    //zwraca liczbę postów danego użytkownika
     public Long countByUsername(String username) {
         final String query = """
                 SELECT
@@ -82,6 +85,7 @@ public class PostDao extends BaseDao {
         }
     }
 
+    //zwraca post o podanym id z bazy danych
     public Optional<Post> findById(Long id) {
         final String query = """
                 SELECT
@@ -104,6 +108,7 @@ public class PostDao extends BaseDao {
         }
     }
 
+    //zapisuje post do bazy danych
     public void savePost(Post post) {
         final String query = """
                 INSERT INTO
@@ -128,6 +133,7 @@ public class PostDao extends BaseDao {
         }
     }
 
+    //usuwa post z bazy danych po podaniu jego id
     public void deletePostById(Long id) {
         final String query = """
                 DELETE FROM
@@ -144,6 +150,7 @@ public class PostDao extends BaseDao {
         }
     }
 
+    //mapper konwertujący obiekt klasy ResultSet na obiekt klasy Post
     private Post mapRow(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String title = resultSet.getString("title");
