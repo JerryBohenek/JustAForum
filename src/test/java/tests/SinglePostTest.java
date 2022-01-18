@@ -3,17 +3,14 @@ package tests;
 import config.TestConfig;
 import org.junit.Assert;
 import org.junit.Test;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.MyPostsPage;
-import pages.NewPostPage;
+import pages.*;
 import util.Data;
 import util.DataFaker;
 
-public class MyPostsTest extends TestConfig {
+public class SinglePostTest extends TestConfig {
 
     @Test
-    public void testNewPostAppear() {
+    public void testNewPostCorrectTitleAndContent() {
         HomePage homePage = new HomePage();
         LoginPage loginPage = homePage.goToLoginPage();
 
@@ -29,22 +26,32 @@ public class MyPostsTest extends TestConfig {
         newPostPage.writeNewPost(title, Data.FRONTEND_CATEGORY, content);
 
         newPostPage.goMyPostsPage();
+        SinglePostPage singlePostPage = myPostsPage.goToFirstPost();
 
-        Assert.assertEquals(myPostsPage.getFirstPostTitle(), title);
-        Assert.assertEquals(myPostsPage.getFirstPostContent(), content);
+        Assert.assertEquals(singlePostPage.getPostTitle(), title);
+        Assert.assertEquals(singlePostPage.getPostContent(), content);
     }
 
     @Test
-    public void testDeleteUserDialog() {
+    public void testNewCommentAppear() {
         HomePage homePage = new HomePage();
         LoginPage loginPage = homePage.goToLoginPage();
+
+        String commentContent = DataFaker.getContent();
 
         loginPage.fillInUsernameAndPassword(Data.USERNAME, Data.PASSWORD);
         loginPage.submitForm();
 
         MyPostsPage myPostsPage = homePage.goMyPostsPage();
-        myPostsPage.showDeleteAccountDialog();
+        NewPostPage newPostPage = myPostsPage.goToNewPostPage();
 
-        Assert.assertTrue(myPostsPage.deleteAccountDialogIsVisible());
+        newPostPage.writeNewPost(DataFaker.getTitle(), Data.FRONTEND_CATEGORY, DataFaker.getContent());
+
+        newPostPage.goMyPostsPage();
+        SinglePostPage singlePostPage = myPostsPage.goToFirstPost();
+
+        singlePostPage.writeComment(commentContent);
+
+        Assert.assertEquals(singlePostPage.getFirstComment(), commentContent);
     }
 }

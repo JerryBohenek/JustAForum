@@ -19,4 +19,12 @@ public class DataFaker {
     public static String getEmail() {
         return new Faker().internet().emailAddress();
     }
+
+    public static String getTitle() {
+        return new Faker().gameOfThrones().character() + " TEST";
+    }
+
+    public static String getContent() {
+        return new Faker().gameOfThrones().quote();
+    }
 }
